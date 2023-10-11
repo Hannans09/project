@@ -1,0 +1,33 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('data', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('kriteria_id')->constrained('kriteria');
+            $table->foreignId('alternatif_id')->constrained('alternatif');
+            $table->string('value');
+            $table->timestamps();
+
+            // $table->foreignId('kriteria_id')->references('id')->on('kriteria');
+            // $table->foreignId('alternatif_id')->references('id')->on('alternatif');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('data');
+    }
+};
