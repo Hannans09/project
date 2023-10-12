@@ -101,8 +101,8 @@
                                             </td>
                                             <td class="px-4 py-4 text-sm whitespace-nowrap">
                                                 <form onsubmit="return confirm('Menghapus Data?');"
-                                                    action="{{ route('kriteria.destroy', $atr->id) }}" method="POST">
-                                                    <a href="{{ route('kriteria.edit', $atr->id) }}" type="button"
+                                                    action="{{ route('alternatif.destroy', $atr->id) }}" method="POST">
+                                                    <a href="{{ route('alternatif.edit', $atr->id) }}" type="button"
                                                         class="btn btn-warning btn-sm">Edit</a>
                                                     @csrf
                                                     @method('DELETE')

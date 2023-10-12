@@ -42,7 +42,7 @@ class kriteriaController extends Controller
             'atribut' => $request->atribut
         ]);
 
-        return redirect()->route('kriteria.index')->with(['success' => 'Data Berhasil Disimpan!']);
+        return redirect()->route('kriteria.create')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
     /**

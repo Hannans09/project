@@ -7,26 +7,18 @@ use App\Models\data;
 use App\Models\kriteria;
 use Illuminate\Http\Request;
 
-class MethodeWpController extends Controller
+class metodeWpController extends Controller
 {
     public function index()
     {
+
         $data = data::with('kriteria', 'alternatif')->get();
-
-        return view('metodeWp.index', compact('data'));
-    }
-
-    public function methodewp()
-    {
-
-        // Mengambil data dari tabel Alternatif
+        // Mengambil data dari tabel Alternatif dan kriteria
+        $kriteria = kriteria::all();
         $alternatif = alternatif::all();
 
-        // Mengambil data dari tabel Kriteria
-        $kriteria = kriteria::all();
-
-        // Mengambil data dari tabel AlternatifKriteriaValue
-        $altkrit = data::all();
+        // Mengambil data dari tabel data
+        $data = data::all();
 
         // Membuat array untuk menyimpan bobot kriteria
         $weights = [];
@@ -52,10 +44,10 @@ class MethodeWpController extends Controller
             $weightedValue = 1;
             foreach ($kriteria as $k) {
                 // Mencari data dari tabel AlternatifKriteriaValue berdasarkan id alternatif dan kriteria
-                $altKriteriaData = $altkrit->where('alternatif_id', $a->id)->where('kriteria_id', $k->id)->first();
+                $Data = $data->where('alternatif_id', $a->id)->where('kriteria_id', $k->id)->first();
 
                 // Periksa apakah data ditemukan
-                $value = $altKriteriaData->value;
+                $value = $Data->value;
 
                 if ($k->attribut == 'benefit') {
                     $weightedValue *= pow($value, $weights[$k->id]);
@@ -86,7 +78,7 @@ class MethodeWpController extends Controller
         // Menentukan alternatif terbaik
         // $bestAlternative = collect($finalValues)->keys()->max();
 
-        return view('menu.methodewp', compact('weightedValues', 'finalValues', 'alternatif'));
+        return view('metodeWp.index', compact('weightedValues', 'finalValues', 'alternatif'));
     }
 
     public function hasil()
@@ -99,7 +91,7 @@ class MethodeWpController extends Controller
         $kriteria = Kriteria::all();
 
         // Mengambil data dari tabel AlternatifKriteriaValue
-        $altkrit = data::all();
+        $data = data::all();
 
         // Membuat array untuk menyimpan bobot kriteria
         $weights = [];
@@ -125,10 +117,10 @@ class MethodeWpController extends Controller
             $weightedValue = 1;
             foreach ($kriteria as $k) {
                 // Mencari data dari tabel AlternatifKriteriaValue berdasarkan id alternatif dan kriteria
-                $altKriteriaData = $altkrit->where('alternatif_id', $a->id)->where('kriteria_id', $k->id)->first();
+                $Data = $data->where('alternatif_id', $a->id)->where('kriteria_id', $k->id)->first();
 
                 // Periksa apakah data ditemukan
-                $value = $altKriteriaData->value;
+                $value = $Data->value;
 
                 if ($k->attribut == 'benefit') {
                     $weightedValue *= pow($value, $weights[$k->id]);

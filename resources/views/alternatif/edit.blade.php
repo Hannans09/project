@@ -3,8 +3,9 @@
     <div class="flex justify-center py-5">
         <div
             class="block w-1/2 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <form action="{{ route('kriteria.store') }}" method='post' enctype="multipart/form-data">
+            <form action="{{ route('alternatif.update', $alternatif->id) }}" method='post' enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 @if ($errors->any())
                     <div class="alert alert-danger mt-3" role="alert" id="danger-alert">
                         <ul>
@@ -23,40 +24,17 @@
                 <div class="relative z-0 w-full mb-6 group">
                     <input type="text" name='nama' id="nama"
                         class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                        placeholder=" " required />
+                        placeholder=" " required value={{ $alternatif->nama }} />
                     <label for="nama"
                         class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nama</label>
                 </div>
                 <div class="relative z-0 w-full mb-6 group">
-                    <input type="number" name='bobot' id="bobot" step="0.01"
+                    <input type="text" name='keterangan' id="keterangan" step="0.01"
                         class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                        placeholder=" " required />
-                    <label for="bobot"
-                        class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Bobot</label>
+                        placeholder=" " required value={{ $alternatif->keterangan }} />
+                    <label for="keterangan"
+                        class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Keterangan</label>
                 </div>
-                <fieldset class="relative z-0 w-full mb-6 group">
-                    <legend
-                        class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent  appearance-none dark:text-white dark:border-gray-600 focus:outline-none focus:ring-0">
-                        Atribut</legend>
-                    <div
-                        class="col-sm-10 block px-0 w-full text-sm text-gray-500 bg-transparent  appearance-none dark:text-white dark:border-gray-600 focus:outline-none focus:ring-0">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="atribut" id="atribut1"
-                                value="benefit">
-                            <label class="form-check-label" for="atribut1">
-                                Benefit
-                            </label>
-                        </div>
-                        <div class="form-check py-2">
-                            <input class="form-check-input" type="radio" name="atribut" id="atribut2" value="cost">
-                            <label class="form-check-label" for="atribut2">
-                                Cost
-                            </label>
-                        </div>
-                    </div>
-                </fieldset>
-                <a href={{ route('kriteria.index') }} type="button"
-                    class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Back</a>
                 <button type="submit"
                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
             </form>

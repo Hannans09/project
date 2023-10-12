@@ -46,15 +46,7 @@ class dataController extends Controller
             'value' => $request->value
         ]);
 
-        return redirect()->route('data.index')->with(['success' => 'Data Berhasil Disimpan!']);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        return redirect()->route('data.create')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
     /**
@@ -62,7 +54,10 @@ class dataController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $kriteria = kriteria::all();
+        $alternatif = alternatif::all();
+        $data = data::findOrFail($id);
+        return view('data.edit', compact('data', 'kriteria', 'alternatif'));
     }
 
     /**
@@ -70,7 +65,21 @@ class dataController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $this->validate($request, [
+            'kriteria_id' => 'required',
+            'alternatif_id' => 'required',
+            'value' => 'required'
+        ]);
+
+        $data = data::findOrFail($id);
+
+        $data->update([
+            'kriteria_id' => $request->kriteria_id,
+            'alternatif_id' => $request->alternatif_id,
+            'value' => $request->value
+        ]);
+
+        return redirect()->route('data.index');
     }
 
     /**
@@ -78,6 +87,8 @@ class dataController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $data = data::findOrFail($id);
+        $data->delete();
+        return redirect()->route('data.index')->with(['success' => 'Data Berhasil di Hapus!']);
     }
 }

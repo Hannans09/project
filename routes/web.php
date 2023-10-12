@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\dataController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\kriteriaController;
+use App\Http\Controllers\metodeWpController;
 use App\Http\Controllers\alternatifController;
 
 /*
@@ -21,6 +22,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::resource('/metodeWp', metodeWpController::class);
 Route::resource('/kriteria', kriteriaController::class);
 Route::resource('/alternatif', alternatifController::class);
 Route::resource('/data', dataController::class);

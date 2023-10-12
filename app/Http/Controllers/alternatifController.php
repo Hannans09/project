@@ -38,7 +38,7 @@ class alternatifController extends Controller
             'nama' => $request->nama,
             'keterangan' => $request->keterangan,
         ]);
-        return redirect()->route('alternatif.index')->with(['success' => 'Data Berhasil Disimpan!']);
+        return redirect()->route('alternatif.create')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
     /**
@@ -46,7 +46,8 @@ class alternatifController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $alternatif = alternatif::findOrFail($id);
+        return view('alternatif.edit', compact('alternatif'));
     }
 
     /**
@@ -54,7 +55,18 @@ class alternatifController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $this->validate($request, [
+            'nama' => 'required',
+            'keterangan' => 'required',
+        ]);
+
+        $alternatif = alternatif::findOrFail($id);
+
+        $alternatif->update([
+            'nama' => $request->nama,
+            'keterangan' => $request->keterangan,
+        ]);
+        return redirect()->route('alternatif.index')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
     /**
@@ -62,6 +74,8 @@ class alternatifController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $alternatif = alternatif::findOrFail($id);
+        $alternatif->delete();
+        return redirect()->route('alternatif.index')->with(['success' => 'Data Berhasil di Hapus!']);
     }
 }
